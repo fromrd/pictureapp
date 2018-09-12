@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Picture App</title>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width"> 
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <p>Picture App</p>
+      <ul class="session">
+        <% if logged_in? %>
+          <li><%= link_to 'Profile', user_path(current_user.id) %></li>
+          <li><%= link_to 'Log out', session_path(current_user.id), method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Sign Up', new_user_path %></li>
+          <li><%= link_to 'Log in', new_session_path %></li>
+        <% end %>        
+      </ul>
+    </header>
+    <nav class="menu">
+      <div class="container">
+        <ul class="row">
+          <li class="col-md-4"><%= link_to 'トップ', top_pictures_path %></li>
+          <li class="col-md-4"><%= link_to '投稿一覧', pictures_path %></li>
+          <li class="col-md-4"><%= link_to '新規作成', new_picture_path %></li>
+        </ul>
+      </div>
+    </nav>
+
+    <% flash.each do |key, value| %>
+      <% content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    
+    <div class="wide_content">
+    <%= yield %>
+    </div>
+    
+    <footer>
+      <p>運営会社DIVE INTO CODE株式会社</p>
+      <p>© 2015-2016 Copyright DIVE INTO CODE Corp.</p>
+    </footer>
+  </body>
+</html>

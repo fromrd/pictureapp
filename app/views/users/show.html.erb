@@ -1,0 +1,12 @@
+<div class="user_page">
+    <%= image_tag @user.image %>
+    <h1><%= @user.name %>のページ</h1>
+
+</div>
+    <p>メールアドレス：<%= @user.email %></p><br>
+<div>
+    <h2>お気に入り一覧</h2>
+    <% @favorites_pictures.each do |favorite_picture| %>
+    <p><%= link_to "#{favorite_picture.picture.content}", picture_path(id: favorite_picture.picture_id) %></p>
+    <% end %>
+</div>

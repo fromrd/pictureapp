@@ -1,0 +1,26 @@
+<div id="pic-contents">
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+  <h1>投稿一覧</h1>
+  
+  <div id="new-picture-link">
+    <%= link_to '新規作成する', new_picture_path %>
+  </div>
+  
+  <% @pictures.each do |picture| %>
+    <div class="col-xs-12 col-md-6 picture-panel">
+      <img id="picture_image">
+        <%= image_tag(picture.image) %>
+      </img>
+      <p>Content：<%= picture.content %></p>
+      <% unless @current_user.nil? %>
+        <%= link_to 'Show', picture, class: 'btn btn-default' %>
+        <% if @current_user.id == picture.user_id %>
+          <%= link_to 'Edit', edit_picture_path(picture), class: 'btn btn-info' %> |
+          <%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
