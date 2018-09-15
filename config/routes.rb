@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'sessions/new'
 
-  root to: 'pictures#index'
+  root to: 'pictures#top'
   
   resources :sessions, only: [:new, :create, :destroy]
 
